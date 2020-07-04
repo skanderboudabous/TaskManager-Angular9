@@ -1,0 +1,50 @@
+<form id="add-user-form" (submit)="submit()" #addUser="ngForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput #username="ngModel" minlength="5" id="username" name="username" [(ngModel)]="user.username"
+           required>
+    <mat-error *ngIf="username.invalid">
+      <span *ngIf="username.errors.required">username is required</span>
+      <span *ngIf="username.errors.minlength">username is too short</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Lastname</mat-label>
+    <input matInput #lastName="ngModel" id="lastName" name="lastName" required [(ngModel)]="user.lastName">
+  </mat-form-field>
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Firstname</mat-label>
+    <input matInput #firstName="ngModel" id="firstName" name="firstName" required [(ngModel)]="user.firstName">
+  </mat-form-field>
+  <mat-form-field *ngIf="!id" appearance="fill">
+    <mat-icon matPrefix>lock</mat-icon>
+    <mat-label>Password</mat-label>
+    <input type="password" matInput #password="ngModel" id="password" name="password" required minlength="5"
+           [(ngModel)]="user.password">
+    <mat-error matSuffix *ngIf="password.invalid">
+      <span *ngIf="password.errors.required">Password is required</span>
+      <span *ngIf="password.errors.minlength">Password is too short</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput #email="ngModel" id="email" name="email" required [(ngModel)]="user.email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Role</mat-label>
+    <mat-select #role="ngModel"  id="role" name="role" [(ngModel)]="user.role"  required>
+      <mat-option [value]="'ADMIN'">ADMIN</mat-option>
+      <mat-option [value]="'PROJECT_MANAGER'">PROJECT_MANAGER</mat-option>
+      <mat-option [value]="'DEVELOPER'">DEVELOPER</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <button [disabled]="addUser.invalid" class="mat-primary" type="submit" mat-raised-button>Confirmer</button>
+  <button type="reset" mat-raised-button>reset</button>
+
+</form>

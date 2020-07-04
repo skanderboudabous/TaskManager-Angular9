@@ -1,0 +1,31 @@
+<form id="add-project-form" (submit)="submit()" #addProject="ngForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput #title="ngModel" id="title" name="title" [(ngModel)]="project.title" required>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <input matInput #description="ngModel" id="description" name="description"  [(ngModel)]="project.description" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Manager</mat-label>
+    <mat-select id="manager" name="manager" [(ngModel)]="project.manager" required>
+      <mat-option *ngFor="let links of manager" [value]="'/users/'+links.id"
+              [routerLink]="'/users/'+links.id" routerLinkActive #rla="routerLinkActive">
+        {{links.username}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Developers</mat-label>
+    <mat-select multiple id="developers" name="developers" [(ngModel)]="project.developers" required>
+      <mat-option *ngFor="let dev of developers" [value]="'/users/'+dev.id" [routerLink]="'/users/'+dev.id" routerLinkActive
+              #rla="routerLinkActive">
+        {{dev.username}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button [disabled]="addProject.invalid" class="mat-primary" type="submit" mat-raised-button>Confirmer</button>
+  <button type="reset" mat-raised-button>reset</button>
+</form>

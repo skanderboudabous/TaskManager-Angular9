@@ -1,0 +1,59 @@
+<button mat-button color="primary" routerLink="/tasks/add">Add Task</button>
+<div class="example-container">
+  <h2>To do</h2>
+
+  <div
+    cdkDropList
+    id="TODO"
+    #todoList="cdkDropList"
+    [cdkDropListData]="todo"
+    [cdkDropListConnectedTo]="[finishedList,inProgressList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of todo" cdkDrag>
+      {{item.title}}
+      <br>
+      {{item.description}}
+    </div>
+  </div>
+</div>
+
+
+<div class="example-container">
+  <h2>In Progress</h2>
+
+  <div
+    cdkDropList
+    id="IN_PROGRESS"
+    #inProgressList="cdkDropList"
+    [cdkDropListData]="in_progress"
+    [cdkDropListConnectedTo]="[todoList,finishedList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of in_progress" cdkDrag>
+      {{item.title}}
+      <br>
+      {{item.description}}
+    </div>
+  </div>
+</div>
+
+
+<div class="example-container">
+  <h2>Finished</h2>
+
+  <div
+    cdkDropList
+    id="FINISHED"
+    #finishedList="cdkDropList"
+    [cdkDropListData]="finished"
+    [cdkDropListConnectedTo]="[todoList,inProgressList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of finished" cdkDrag>
+      {{item.title}}
+      <br>
+      {{item.description}}
+    </div>
+  </div>
+</div>
